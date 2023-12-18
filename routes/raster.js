@@ -33,15 +33,13 @@ router.get("/:z/:x/:y.png", async (req, res) => {
   try {
     const q = generateRasterTile.replace("$query", 'SELECT * FROM ny_geotiff');
 
-    console.log('q', q, z, x, y);
+    // console.log('q', q, z, x, y);
 
     const {
       rows: [tile],
     } = await pool.query(q, [z, x, y]).catch(err => {
       console.log(err);
     });
-
-    console.log('tile', tile.st_aspng);
 
     res.setHeader("Content-Type", 'image/png');
 

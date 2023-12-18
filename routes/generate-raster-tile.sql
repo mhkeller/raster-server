@@ -3,8 +3,10 @@ query AS (
   $query
 )
 SELECT
-  st_aspng(st_clip(st_transform(query.rast, 3857), tilebounds.geom))
+  st_aspng(ST_Clip(
+    	st_transform(query.rast, 3857),
+    	tilebounds.geom
+  ))
 FROM
   query, tilebounds
 where st_transform(query.rast, 3857) && tilebounds.geom
--- order by random()
