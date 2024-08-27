@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Raster + vector server</title>
     <meta property="og:description" content="Add a vector source to a map." />
@@ -8,66 +9,77 @@
     <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css' />
     <script src='https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js'></script>
     <style>
-        body { margin: 0; padding: 0; }
-        html, body, #map { height: 100%; }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+        }
     </style>
 </head>
+
 <body>
-<div id="map"></div>
-<script>
-    const map = new maplibregl.Map({
-        container: 'map',
-        style: '//raw.githubusercontent.com/NYCPlanning/labs-gl-style/master/data/style.json',
-        zoom: 10,
-        center: [-74, 40.74]
-    });
-
-    map.on('load', () => {
-        /**
-         * Add a vector source containing GeoJSON data to the map.
-         */
-        map.addSource('my-source', {
-            type: 'vector',
-            tiles:
-                ['http://localhost:4000/tiles/{z}/{x}/{y}.mvt']
+    <div id="map"></div>
+    <script>
+        const map = new maplibregl.Map({
+            container: 'map',
+            style: '//raw.githubusercontent.com/NYCPlanning/labs-gl-style/master/data/style.json',
+            zoom: 10,
+            center: [-74, 40.74]
         });
-        // map.addLayer({
-        //     'id': 'path-data',
-        //     'type': 'line',
-        //     'source': 'my-source',
-        //     'source-layer': 'default',
-        //     'layout': {
-        //         'line-join': 'round',
-        //         'line-cap': 'round'
-        //     },
-        //     'paint': {
-        //         'line-color': '#ff69b4',
-        //         'line-width': 4
-        //     }
-        // });
 
-        /**
-         * Add a raster tile layer to the map.
-         */
-        map.addSource('my-raster', {
-            type: 'raster',
-            tiles: ['http://localhost:4000/raster/{z}/{x}/{y}.png'],
-            tileSize: 512,
-            // set a min and max zoom
-            // minzoom: 5,
-            // maxzoom: 15,
-        });
-        map.addLayer({
-            'id': 'raster-data',
-            'type': 'raster',
-            'source': 'my-raster',
-            'paint': {
-            'raster-opacity': 0.75
-            },
+        map.on('load', () => {
+            /**
+             * Add a vector source containing GeoJSON data to the map.
+             */
+            map.addSource('my-source', {
+                type: 'vector',
+                tiles:
+                    ['http://localhost:4000/tiles/{z}/{x}/{y}.mvt']
+            });
+            // map.addLayer({
+            //     'id': 'path-data',
+            //     'type': 'line',
+            //     'source': 'my-source',
+            //     'source-layer': 'default',
+            //     'layout': {
+            //         'line-join': 'round',
+            //         'line-cap': 'round'
+            //     },
+            //     'paint': {
+            //         'line-color': '#ff69b4',
+            //         'line-width': 4
+            //     }
+            // });
 
-            // 'source-layer': 'default',
+            /**
+             * Add a raster tile layer to the map.
+             */
+            map.addSource('my-raster', {
+                type: 'raster',
+                tiles: ['http://localhost:4000/raster/{z}/{x}/{y}.png'],
+                tileSize: 512,
+                buffer: 10
+                // set a min and max zoom
+                // minzoom: 5,
+                // maxzoom: 15,
+            });
+            map.addLayer({
+                'id': 'raster-data',
+                'type': 'raster',
+                'source': 'my-raster',
+                'paint': {
+                    'raster-opacity': 0.75
+                },
+
+                // 'source-layer': 'default',
+            });
         });
-    });
-</script>
+    </script>
 </body>
+
 </html>
