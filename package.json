@@ -7,7 +7,7 @@
     "tile-server": "node server.js",
     "web-server": "http-server",
     "precreate-raster": "gdalwarp -s_srs EPSG:5070 -t_srs EPSG:3857 ./data/ny_geotiff.tif ./data/ny_geotiff_warped.tif",
-    "create-raster": "raster2pgsql -s 3857 -I -M -C ./data/ny_geotiff_warped.tif -t 512x512 | psql -h localhost -p 5432 -d DATABASE -U USEr -w"
+    "create-raster": "raster2pgsql -s 3857 -I -M -C ./data/ny_geotiff_warped.tif -t 512x512 | psql -h localhost -p 5432 -d DATABASE -U USER -w"
   },
   "keywords": [],
   "author": "",
