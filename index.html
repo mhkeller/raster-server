@@ -63,7 +63,6 @@
                 type: 'raster',
                 tiles: ['http://localhost:4000/raster/{z}/{x}/{y}.png'],
                 tileSize: 512,
-                buffer: 10
                 // set a min and max zoom
                 // minzoom: 5,
                 // maxzoom: 15,
@@ -78,6 +77,8 @@
 
                 // 'source-layer': 'default',
             });
+
+            map.showTileBoundaries = true;
         });
     </script>
 </body>
