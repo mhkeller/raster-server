@@ -27,7 +27,7 @@
     <script>
         const map = new maplibregl.Map({
             container: 'map',
-            style: '//raw.githubusercontent.com/NYCPlanning/labs-gl-style/master/data/style.json',
+            style: 'https://demotiles.maplibre.org/style.json',
             zoom: 10,
             center: [-74, 40.74]
         });
@@ -36,24 +36,10 @@
             /**
              * Add a vector source containing GeoJSON data to the map.
              */
-            map.addSource('my-source', {
-                type: 'vector',
-                tiles:
-                    ['http://localhost:4000/tiles/{z}/{x}/{y}.mvt']
-            });
-            // map.addLayer({
-            //     'id': 'path-data',
-            //     'type': 'line',
-            //     'source': 'my-source',
-            //     'source-layer': 'default',
-            //     'layout': {
-            //         'line-join': 'round',
-            //         'line-cap': 'round'
-            //     },
-            //     'paint': {
-            //         'line-color': '#ff69b4',
-            //         'line-width': 4
-            //     }
+            // map.addSource('my-source', {
+            //     type: 'vector',
+            //     tiles:
+            //         ['http://localhost:4000/tiles/{z}/{x}/{y}.mvt']
             // });
 
             /**
@@ -63,9 +49,6 @@
                 type: 'raster',
                 tiles: ['http://localhost:4000/raster/{z}/{x}/{y}.png'],
                 tileSize: 512,
-                // set a min and max zoom
-                // minzoom: 5,
-                // maxzoom: 15,
             });
             map.addLayer({
                 'id': 'raster-data',
@@ -74,8 +57,6 @@
                 'paint': {
                     'raster-opacity': 0.75
                 },
-
-                // 'source-layer': 'default',
             });
 
             map.showTileBoundaries = true;
